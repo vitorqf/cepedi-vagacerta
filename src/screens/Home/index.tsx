@@ -12,8 +12,8 @@ export default function Home() {
 
   const counter = 337;
 
-  const handleGoToDetail = useCallback(() => {
-    navigate("Detail");
+  const handleGoToProfile = useCallback(() => {
+    navigate("Profile");
   }, []);
   return (
     <Wrapper>
@@ -23,7 +23,7 @@ export default function Home() {
         <Logo />
         <Counter>{counter} vagas encontradas</Counter>
         <Info>Clique no marcador para saber mais sobre a vaga.</Info>
-        <Button title="Ver meus dados" onPress={handleGoToDetail} />
+        <Button title="Ver meus dados" onPress={handleGoToProfile} />
       </Container>
     </Wrapper>
   );

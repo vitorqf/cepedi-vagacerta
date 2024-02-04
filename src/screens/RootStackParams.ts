@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Login: undefined;
   Register: undefined;
   Detail: undefined;
+  Profile: undefined;
 };
 
 export type INavigationProps = NavigationProp<RootStackParamList>;
