@@ -1,12 +1,11 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { Image } from "react-native";
 import bgtop from "../../assets/bgtop.png";
 import { Button } from "../../components/Button";
 import { Field } from "../../components/Field";
 import { Logo } from "../../components/Logo";
-import { RegisterNavigationProps } from "../Register";
-import { RootStackParamList } from "../RootStackParams";
+import { INavigationProps } from "../RootStackParams";
 import {
   CallSignin,
   CallSigninStrong,
@@ -15,13 +14,15 @@ import {
   Wrapper,
 } from "./styles";
 
-export type LoginNavigationProps = NavigationProp<RootStackParamList, "Login">;
-
 export default function Login() {
-  const { navigate } = useNavigation<RegisterNavigationProps>();
+  const { navigate } = useNavigation<INavigationProps>();
 
   const handleNavigateToRegister = useCallback(() => {
     navigate("Register");
+  }, [navigator]);
+
+  const handleNavigateToHome = useCallback(() => {
+    navigate("Home");
   }, [navigator]);
   return (
     <Wrapper>
@@ -32,7 +33,7 @@ export default function Login() {
         <Form>
           <Field label="E-mail" placeholder="digite seu e-mail" />
           <Field label="Senha" placeholder="digite sua senha" />
-          <Button title="Entrar" />
+          <Button title="Entrar" onPress={handleNavigateToHome} />
           <CallSignin>
             Não tem conta?{" "}
             <CallSigninStrong onPress={handleNavigateToRegister}>
