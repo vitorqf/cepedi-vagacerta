@@ -5,7 +5,7 @@ import bgtop from "../../assets/bgtop.png";
 import { Button } from "../../components/Button";
 import { Field } from "../../components/Field";
 import { Logo } from "../../components/Logo";
-import { RegisterNavigationProps } from "../Register";
+import { LoginNavigationProps } from "../Login";
 import { RootStackParamList } from "../RootStackParams";
 import {
   CallSignin,
@@ -15,14 +15,18 @@ import {
   Wrapper,
 } from "./styles";
 
-export type LoginNavigationProps = NavigationProp<RootStackParamList, "Login">;
+export type RegisterNavigationProps = NavigationProp<
+  RootStackParamList,
+  "Register"
+>;
 
-export default function Login() {
-  const { navigate } = useNavigation<RegisterNavigationProps>();
+export default function Register() {
+  const { navigate } = useNavigation<LoginNavigationProps>();
 
-  const handleNavigateToRegister = useCallback(() => {
-    navigate("Register");
+  const handleNavigateToLogin = useCallback(() => {
+    navigate("Login");
   }, [navigator]);
+
   return (
     <Wrapper>
       <Image source={bgtop} />
@@ -30,13 +34,14 @@ export default function Login() {
       <Container>
         <Logo />
         <Form>
+          <Field label="Nome" placeholder="digite seu nome" />
           <Field label="E-mail" placeholder="digite seu e-mail" />
           <Field label="Senha" placeholder="digite sua senha" />
           <Button title="Entrar" />
           <CallSignin>
-            Não tem conta?{" "}
-            <CallSigninStrong onPress={handleNavigateToRegister}>
-              Crie agora mesmo.
+            Já tem uma conta?{" "}
+            <CallSigninStrong onPress={handleNavigateToLogin}>
+              Faça seu login.
             </CallSigninStrong>
           </CallSignin>
         </Form>
