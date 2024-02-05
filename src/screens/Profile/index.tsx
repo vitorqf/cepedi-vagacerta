@@ -1,17 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
-import { useCallback } from "react";
+import { Formik } from "formik";
 import { Button } from "../../components/Button";
-import { Field } from "../../components/Field";
+import { LabelledInput } from "../../components/Field";
 import { Logo } from "../../components/Logo";
-import { INavigationProps } from "../RootStackParams";
 import { Content, Header, Splitter, Wrapper } from "./styles";
+import useProfile from "./useProfile";
 
 export default function Profile() {
-  const { goBack } = useNavigation<INavigationProps>();
-
-  const handleGoBack = useCallback(() => {
-    goBack();
-  }, []);
+  const { handleFormSubmit, ProfileSchema, handleGoBack, initialValues } =
+    useProfile();
 
   return (
     <Wrapper>
@@ -27,12 +23,33 @@ export default function Profile() {
 
       <Splitter />
 
-      <Content>
-        <Field label="Nome" placeholder="digite seu nome" />
-        <Field label="E-mail" placeholder="digite seu e-mail" />
-        <Field label="Senha" placeholder="digite sua senha" />
-        <Button title="Salvar informações" />
-      </Content>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={ProfileSchema}
+        onSubmit={handleFormSubmit}
+      >
+        {({ handleSubmit }) => (
+          <Content>
+            <LabelledInput
+              label="Nome"
+              placeholder="digite seu nome"
+              name="name"
+            />
+            <LabelledInput
+              label="E-mail"
+              placeholder="digite seu e-mail"
+              name="email"
+            />
+            <LabelledInput
+              label="Senha"
+              placeholder="digite sua senha"
+              name="password"
+              secureTextEntry
+            />
+            <Button title="Salvar informações" onPress={() => handleSubmit()} />
+          </Content>
+        )}
+      </Formik>
     </Wrapper>
   );
 }

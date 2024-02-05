@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "name": "admin",
+  "email": "root@email.com",
+  "senha": "root123",
+  "cidade": "São Paulo",
+  "estado": "SP"
+}

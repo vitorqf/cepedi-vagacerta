@@ -5,10 +5,10 @@ export const Wrapper = styled.View`
   gap: 4px;
 `;
 
-export const Label = styled.Text`
+export const Label = styled.Text<{ $isError?: boolean }>`
   font-size: 14px;
   font-weight: 700;
   line-height: 16px;
   text-align: left;
-  color: #1e6262;
+  color: ${({ $isError }) => ($isError ? "#ff6666" : "#1e6262")};
 `;

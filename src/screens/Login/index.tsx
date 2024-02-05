@@ -1,11 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
-import { useCallback } from "react";
+import { Formik } from "formik";
 import { Image } from "react-native";
 import bgtop from "../../assets/bgtop.png";
 import { Button } from "../../components/Button";
-import { Field } from "../../components/Field";
+import { LabelledInput } from "../../components/Field";
 import { Logo } from "../../components/Logo";
-import { INavigationProps } from "../RootStackParams";
 import {
   CallSignin,
   CallSigninStrong,
@@ -13,34 +11,60 @@ import {
   Form,
   Wrapper,
 } from "./styles";
+import useLogin from "./useLogin";
 
 export default function Login() {
-  const { navigate } = useNavigation<INavigationProps>();
+  const {
+    initialValues,
+    LoginSchema,
+    handleFormSubmit,
+    handleNavigateToRegister,
+  } = useLogin();
 
-  const handleNavigateToRegister = useCallback(() => {
-    navigate("Register");
-  }, [navigator]);
-
-  const handleNavigateToHome = useCallback(() => {
-    navigate("Home");
-  }, [navigator]);
   return (
     <Wrapper>
       <Image source={bgtop} />
 
       <Container>
         <Logo />
-        <Form>
-          <Field label="E-mail" placeholder="digite seu e-mail" />
-          <Field label="Senha" placeholder="digite sua senha" />
-          <Button title="Entrar" onPress={handleNavigateToHome} />
-          <CallSignin>
-            Não tem conta?{" "}
-            <CallSigninStrong onPress={handleNavigateToRegister}>
-              Crie agora mesmo.
-            </CallSigninStrong>
-          </CallSignin>
-        </Form>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={LoginSchema}
+          onSubmit={handleFormSubmit}
+        >
+          {({ errors, touched, handleSubmit }) => {
+            return (
+              <Form>
+                <LabelledInput
+                  label="E-mail"
+                  placeholder="digite seu e-mail"
+                  name="email"
+                  error={
+                    errors.email && touched.email ? errors.email : undefined
+                  }
+                />
+                <LabelledInput
+                  label="Senha"
+                  placeholder="digite sua senha"
+                  name="password"
+                  error={
+                    errors.password && touched.password
+                      ? errors.password
+                      : undefined
+                  }
+                  secureTextEntry
+                />
+                <Button title="Entrar" onPress={() => handleSubmit()} />
+                <CallSignin>
+                  Não tem conta?{" "}
+                  <CallSigninStrong onPress={handleNavigateToRegister}>
+                    Crie agora mesmo.
+                  </CallSigninStrong>
+                </CallSignin>
+              </Form>
+            );
+          }}
+        </Formik>
       </Container>
     </Wrapper>
   );
