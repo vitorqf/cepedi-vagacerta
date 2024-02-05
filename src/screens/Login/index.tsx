@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import { Image } from "react-native";
 import bgtop from "../../assets/bgtop.png";
 import { Button } from "../../components/Button";
-import { LabelledInput } from "../../components/Field";
+import { LabelledInput } from "../../components/LabelledInput";
 import { Logo } from "../../components/Logo";
 import {
   CallSignin,
