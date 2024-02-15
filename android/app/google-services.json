@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "533741709672",
+    "project_id": "teste-79c5e",
+    "storage_bucket": "teste-79c5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533741709672:android:591e51c27b67ac591e8edd",
+        "android_client_info": {
+          "package_name": "com.anonymous.vagacerta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6fJ2FMqQEfW65OJuM4LRcAb-6Cokb1_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
