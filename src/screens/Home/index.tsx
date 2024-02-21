@@ -2,22 +2,25 @@ import { useNavigation } from "@react-navigation/native";
 import * as Device from "expo-device";
 import * as Location from "expo-location";
 import { useCallback, useEffect, useState } from "react";
-import MapView, {
-  MapPressEvent,
-  Marker,
-  PROVIDER_GOOGLE,
-  Region,
-} from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
+import { Job } from "../../@types/job";
 import { Button } from "../../components/Button";
 import { Logo } from "../../components/Logo";
+import api from "../../lib/api";
 import { INavigationProps } from "../RootStackParams";
 import { Container, Counter, Info, Wrapper } from "./styles";
 
 export default function Home() {
   const [currentLocation, setCurrentLocation] = useState<Region>();
-  const [marker, setMarker] = useState<Region>();
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const { navigate } = useNavigation<INavigationProps>();
 
   useEffect(() => {
+    const fetchData = async () => {
+      const jobs = await api.jobs.get();
+      if (jobs) setJobs(jobs);
+    };
+
     if (Device.isDevice) {
       (async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -43,24 +46,16 @@ export default function Home() {
         longitudeDelta: 0.0421,
       });
     }
+
+    fetchData();
   }, []);
-
-  const { navigate } = useNavigation<INavigationProps>();
-
-  const counter = 337;
 
   const handleGoToProfile = useCallback(() => {
     navigate("Profile");
   }, []);
 
-  const handleMapPress = useCallback((event: MapPressEvent) => {
-    const { latitude, longitude } = event.nativeEvent.coordinate;
-    setMarker({
-      latitude,
-      longitude,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    });
+  const handleMarkerPress = useCallback((job: Job) => {
+    navigate("Detail", job);
   }, []);
 
   return (
@@ -73,13 +68,22 @@ export default function Home() {
           flex: 4,
         }}
         initialRegion={currentLocation}
-        onPress={handleMapPress}
       >
-        {marker && <Marker coordinate={marker} />}
+        {jobs.length > 0 &&
+          jobs.map((job) => (
+            <Marker
+              key={job.id}
+              onPress={() => handleMarkerPress(job)}
+              coordinate={{
+                latitude: job.latitude,
+                longitude: job.longitude,
+              }}
+            />
+          ))}
       </MapView>
       <Container>
         <Logo />
-        <Counter>{counter} vagas encontradas</Counter>
+        <Counter>{jobs.length} vagas encontradas</Counter>
         <Info>Clique no marcador para saber mais sobre a vaga.</Info>
         <Button title="Ver meus dados" onPress={handleGoToProfile} />
       </Container>

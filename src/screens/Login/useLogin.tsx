@@ -2,7 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { Alert } from "react-native";
 import * as Yup from "yup";
-import user from "../../data/admin.json";
+import { User } from "../../@types/user";
+import api from "../../lib/api";
 import { INavigationProps } from "../RootStackParams";
 
 interface FormStructure {
@@ -33,8 +34,15 @@ export default function useLogin() {
     navigate("Home");
   }, [navigator]);
 
-  const handleFormSubmit = useCallback((values: FormStructure) => {
-    if (values.email === user.email && values.password === user.senha) {
+  const handleFormSubmit = useCallback(async (values: FormStructure) => {
+    const users = await api.users.get();
+
+    const foundUser = users.find(
+      (user: User) =>
+        user.email === values.email && user.senha === values.password
+    );
+
+    if (foundUser) {
       handleNavigateToHome();
     } else {
       Alert.alert("Erro no login", "E-mail ou senha incorretos");

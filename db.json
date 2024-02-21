@@ -1,0 +1,65 @@
+{
+  "vagas": [
+    {
+      "id": 1,
+      "titulo": "Desenvolvedor Web",
+      "descricao": "Desenvolvimento de aplicações web utilizando HTML, CSS e JavaScript.",
+      "localizacao": "São Paulo, SP",
+      "latitude": 37.78825,
+      "longitude": -122.4324,
+      "salario": 5000
+    },
+    {
+      "id": 2,
+      "titulo": "Analista de Dados",
+      "descricao": "Análise de dados e geração de relatórios utilizando ferramentas como Python e SQL.",
+      "localizacao": "Rio de Janeiro, RJ",
+      "latitude": 37.80025,
+      "longitude": -122.4,
+      "salario": 6000
+    },
+    {
+      "id": 3,
+      "titulo": "Designer Gráfico",
+      "descricao": "Criação de materiais gráficos e identidade visual para clientes.",
+      "localizacao": "Belo Horizonte, MG",
+      "latitude": 37.81,
+      "longitude": -122.42,
+      "salario": 4000
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "admin",
+      "name": "admin",
+      "email": "root@email.com",
+      "senha": "root123",
+      "cidade": "São Paulo",
+      "estado": "SP"
+    },
+    {
+      "id": "1708432434643",
+      "name": "Vitor",
+      "email": "vitor@gmail.com",
+      "senha": "123456",
+      "cidade": "",
+      "estado": ""
+    },
+    {
+      "id": "1708432478349",
+      "name": "vitor",
+      "email": "VITOR@GMAIL.COM",
+      "senha": "123456",
+      "cidade": "",
+      "estado": ""
+    },
+    {
+      "id": "1708474267956",
+      "name": "vitor",
+      "email": "vitor@gmail.com",
+      "senha": "123456",
+      "cidade": "",
+      "estado": ""
+    }
+  ]
+}

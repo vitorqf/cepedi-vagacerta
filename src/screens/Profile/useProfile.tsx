@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import { INavigationProps } from "../RootStackParams";
 
 import * as Yup from "yup";
-import user from "../../data/admin.json";
 
 interface FormStructure {
   name: string;
@@ -21,8 +20,8 @@ export default function useProfile() {
   const { goBack, navigate } = useNavigation<INavigationProps>();
 
   const initialValues: FormStructure = {
-    name: user.name,
-    email: user.email,
+    name: "",
+    email: "",
     password: "",
   };
 
