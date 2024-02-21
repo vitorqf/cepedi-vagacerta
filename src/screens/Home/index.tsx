@@ -54,6 +54,10 @@ export default function Home() {
     navigate("Profile");
   }, []);
 
+  const handleMarkerPress = useCallback((job: Job) => {
+    navigate("Detail", job);
+  }, []);
+
   return (
     <Wrapper>
       <MapView
@@ -69,6 +73,7 @@ export default function Home() {
           jobs.map((job) => (
             <Marker
               key={job.id}
+              onPress={() => handleMarkerPress(job)}
               coordinate={{
                 latitude: job.latitude,
                 longitude: job.longitude,
